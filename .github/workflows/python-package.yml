@@ -27,7 +27,7 @@ jobs:
       - name: Build for Windows
         if: runner.os == 'Windows'
         run: |
-          pyinstaller --onefile --windowed --icon=resources/favicon-original.ico `
+          pyinstaller --onefile --windowed --noupx --icon=resources/favicon-original.ico `
             --add-data "resources/favicon-original.ico;resources" `
             --add-data "resources/favicon-flash.ico;resources" `
             --add-data "resources/logo.png;resources" `
@@ -44,7 +44,7 @@ jobs:
       - name: Build for Linux
         if: runner.os == 'Linux'
         run: |
-          pyinstaller --onefile --windowed --icon=resources/favicon-original.ico \
+          pyinstaller --onefile --windowed --noupx --icon=resources/favicon-original.ico \
             --add-data "resources/favicon-original.ico:resources" \
             --add-data "resources/favicon-flash.ico:resources" \
             --add-data "resources/logo.png:resources" \
@@ -61,7 +61,7 @@ jobs:
       - name: Build for macOS
         if: runner.os == 'macOS'
         run: |
-          pyinstaller --onefile --windowed --icon=resources/favicon-original.ico \
+          pyinstaller --onefile --windowed --noupx --icon=resources/favicon-original.ico \
             --add-data "resources/favicon-original.ico:resources" \
             --add-data "resources/favicon-flash.ico:resources" \
             --add-data "resources/logo.png:resources" \
