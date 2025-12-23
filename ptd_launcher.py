@@ -13,6 +13,7 @@ from download_manager import DownloadManager
 from flash_manager import FlashManager
 from game_manager import GameManager
 from updater import UpdateManager
+from custom_image_button import CustomImageButton
 
 class PTDLauncher:
     def __init__(self, root):
@@ -67,6 +68,19 @@ class PTDLauncher:
             "relief": tk.RAISED
         }
         
+        # define image paths
+        self.button_pokecenter_default = tk.PhotoImage(file=resource_path("resources/PTD_PC_DEFAULT.png"))
+        self.button_pokecenter_hover = tk.PhotoImage(file=resource_path("resources/PTD_PC_HOVER.png"))
+        self.button_pokecenter_pressed = tk.PhotoImage(file=resource_path("resources/PTD_PC_PRESSED.png"))
+
+        self.button_play_default = tk.PhotoImage(file=resource_path("resources/PTD_PLAY_DEFAULT.png"))
+        self.button_play_hover = tk.PhotoImage(file=resource_path("resources/PTD_PLAY_HOVER.png"))
+        self.button_play_pressed = tk.PhotoImage(file=resource_path("resources/PTD_PLAY_PRESSED.png"))
+
+        self.button_hacked_default = tk.PhotoImage(file=resource_path("resources/PTD_HACKED_DEFAULT.png"))
+        self.button_hacked_hover = tk.PhotoImage(file=resource_path("resources/PTD_HACKED_HOVER.png"))
+        self.button_hacked_pressed = tk.PhotoImage(file=resource_path("resources/PTD_HACKED_PRESSED.png"))
+
         # Create UI
         self.create_ui()
         
@@ -146,25 +160,25 @@ class PTDLauncher:
         pokecenter_buttons_frame = tk.Frame(pokecenter_frame, bg="#F8F8F8")
         pokecenter_buttons_frame.pack()
         
-        # Create buttons with teal color
+        # creating PTD Pokecenter buttons
         self._create_button(
             pokecenter_buttons_frame, 
-            "PTD 1 PokéCenter", 
-            "#5AAA95", "white", 
+            "PTD 1\nPokéCenter",
+            self.button_pokecenter_default, self.button_pokecenter_hover, self.button_pokecenter_pressed,
             lambda: self.open_pokecenter("PTD1")
         ).pack(side=tk.LEFT, padx=5)
         
         self._create_button(
             pokecenter_buttons_frame, 
-            "PTD 2 PokéCenter", 
-            "#5AAA95", "white", 
+            "PTD 2\nPokéCenter",
+            self.button_pokecenter_default, self.button_pokecenter_hover, self.button_pokecenter_pressed,
             lambda: self.open_pokecenter("PTD2")
         ).pack(side=tk.LEFT, padx=5)
         
         self._create_button(
             pokecenter_buttons_frame, 
-            "PTD 3 PokéCenter", 
-            "#5AAA95", "white", 
+            "PTD 3\nPokéCenter",
+            self.button_pokecenter_default, self.button_pokecenter_hover, self.button_pokecenter_pressed,
             lambda: self.open_pokecenter("PTD3")
         ).pack(side=tk.LEFT, padx=5)
     
@@ -176,25 +190,25 @@ class PTDLauncher:
         games_buttons_frame = tk.Frame(games_frame, bg="#F8F8F8")
         games_buttons_frame.pack()
         
-        # Create buttons with blue color
+        # Creating play PTD buttons
         self._create_button(
             games_buttons_frame, 
-            "Play PTD 1", 
-            "#4A6EA9", "white", 
+            "Play\nPokemon TD 1", 
+            self.button_play_default, self.button_play_hover, self.button_play_pressed,
             lambda: self.play_game("PTD1")
         ).pack(side=tk.LEFT, padx=5)
         
         self._create_button(
             games_buttons_frame, 
-            "Play PTD 2", 
-            "#4A6EA9", "white", 
+            "Play\nPokemon TD 2", 
+            self.button_play_default, self.button_play_hover, self.button_play_pressed,
             lambda: self.play_game("PTD2")
         ).pack(side=tk.LEFT, padx=5)
         
         self._create_button(
             games_buttons_frame, 
-            "Play PTD 3", 
-            "#4A6EA9", "white", 
+            "Play\nPokemon TD 3", 
+            self.button_play_default, self.button_play_hover, self.button_play_pressed,
             lambda: self.play_game("PTD3")
         ).pack(side=tk.LEFT, padx=5)
     
@@ -206,26 +220,26 @@ class PTDLauncher:
         hacked_buttons_frame = tk.Frame(special_frame, bg="#F8F8F8")
         hacked_buttons_frame.pack()
         
-        # Create buttons with gold color
+        # Create hacked PTD buttons
         self._create_button(
             hacked_buttons_frame, 
-            "PTD 1 Hacked", 
-            "#E09F3E", "white", 
-            lambda: self.play_game("PTD1_Hacked")
+            "PTD 1\nHacked", 
+            self.button_hacked_default, self.button_hacked_hover, self.button_hacked_pressed,
+            lambda: self.play_game("PTD1_Hacked"), "black"
         ).pack(side=tk.LEFT, padx=5)
         
         self._create_button(
             hacked_buttons_frame, 
-            "PTD 2 Hacked", 
-            "#E09F3E", "white", 
-            lambda: self.play_game("PTD2_Hacked")
+            "PTD 2\nHacked", 
+            self.button_hacked_default, self.button_hacked_hover, self.button_hacked_pressed,
+            lambda: self.play_game("PTD2_Hacked"), "black"
         ).pack(side=tk.LEFT, padx=5)
         
         self._create_button(
             hacked_buttons_frame, 
-            "PTD 3 Hacked", 
-            "#E09F3E", "white", 
-            lambda: self.play_game("PTD3_Hacked")
+            "PTD 3\nHacked", 
+            self.button_hacked_default, self.button_hacked_hover, self.button_hacked_pressed,
+            lambda: self.play_game("PTD3_Hacked"), "black"
         ).pack(side=tk.LEFT, padx=5)
     
     def _create_status_bar(self):
@@ -234,16 +248,21 @@ class PTDLauncher:
         self.status_var.set("Ready")
         status_bar = tk.Label(self.root, textvariable=self.status_var, bd=1, relief=tk.SUNKEN, anchor=tk.W)
         status_bar.pack(side=tk.BOTTOM, fill=tk.X)
-    
-    def _create_button(self, parent, text, bg_color, fg_color, command):
+
+    def _create_button(self, parent, text, img_def, img_hov, img_pre, command, text_color="white"):
         """Helper method to create a button with the common style"""
-        return tk.Button(
+        return CustomImageButton(
             parent, 
-            text=text, 
-            bg=bg_color, 
-            fg=fg_color, 
-            command=command, 
-            **self.button_style
+            text=text,
+            text_color=text_color,
+            width=160,
+            height=70,
+            img_default=img_def,
+            img_hover=img_hov,
+            img_pressed=img_pre,
+            command=command,
+            text_offset=12,
+            bg_color="#F8F8F8"
         )
     
     def open_pokecenter(self, game):
