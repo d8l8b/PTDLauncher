@@ -19,8 +19,9 @@ class PTDLauncher:
     def __init__(self, root):
         self.root = root
         self.root.title("PTD Launcher")
-        self.root.geometry("650x400")
+        self.root.geometry("750x500")
         self.root.resizable(False, False)
+        self.root.configure(bg="#151515")
         
         # Initialize managers
         self.config_manager = ConfigManager()
@@ -115,7 +116,7 @@ class PTDLauncher:
         self._create_header()
         
         # Create a frame for the content
-        content_frame = tk.Frame(self.root, bg="#F8F8F8")  # Light background
+        content_frame = tk.Frame(self.root, bg="#151515")
         content_frame.pack(fill=tk.BOTH, expand=True)
         
         # Create UI components
@@ -127,37 +128,37 @@ class PTDLauncher:
     def _create_header(self):
         """Create the header with logo and buttons"""
         # Create a frame for the header with a more appealing color
-        header_frame = tk.Frame(self.root, bg="#4A6EA9", height=150)  # More appealing blue color
+        header_frame = tk.Frame(self.root, bg="#3B4CCA", height=150)  # More appealing blue color
         header_frame.pack(fill=tk.X)
         
         # Add the Pokemon Tower Defense logo
         logo_img = tk.PhotoImage(file=resource_path("resources/logo.png"))
-        logo_label = tk.Label(header_frame, image=logo_img, bg="#4A6EA9")
+        logo_label = tk.Label(header_frame, image=logo_img, bg="#3B4CCA")
         logo_label.image = logo_img  # Keep a reference
         logo_label.pack(side=tk.LEFT, padx=15)
         
         # Add buttons for update and settings
-        button_frame = tk.Frame(header_frame, bg="#4A6EA9")
+        button_frame = tk.Frame(header_frame, bg="#3B4CCA")
         button_frame.pack(side=tk.RIGHT, padx=10)
         
         settings_img = tk.PhotoImage(file=resource_path("resources/settings.png"))
-        settings_btn = tk.Button(button_frame, image=settings_img, bg="#4A6EA9", bd=0,
+        settings_btn = tk.Button(button_frame, image=settings_img, bg="#3B4CCA", bd=0,
                                 command=self.open_settings)
         settings_btn.image = settings_img  # Keep a reference
         settings_btn.pack(side=tk.RIGHT, padx=5)
 
         update_img = tk.PhotoImage(file=resource_path("resources/update.png"))
-        update_btn = tk.Button(button_frame, image=update_img, bg="#4A6EA9", bd=0, 
+        update_btn = tk.Button(button_frame, image=update_img, bg="#3B4CCA", bd=0, 
                               command=lambda: self.update_manager.check_updates(self.root))
         update_btn.image = update_img  # Keep a reference
         update_btn.pack(side=tk.RIGHT, padx=5)
     
     def _create_pokecenter_buttons(self, parent_frame):
         """Create the PokéCenter buttons"""
-        pokecenter_frame = tk.Frame(parent_frame, bg="#F8F8F8")
+        pokecenter_frame = tk.Frame(parent_frame, bg="#151515")
         pokecenter_frame.pack(pady=20)
         
-        pokecenter_buttons_frame = tk.Frame(pokecenter_frame, bg="#F8F8F8")
+        pokecenter_buttons_frame = tk.Frame(pokecenter_frame, bg="#151515")
         pokecenter_buttons_frame.pack()
         
         # creating PTD Pokecenter buttons
@@ -184,10 +185,10 @@ class PTDLauncher:
     
     def _create_game_buttons(self, parent_frame):
         """Create the main game buttons"""
-        games_frame = tk.Frame(parent_frame, bg="#F8F8F8")
+        games_frame = tk.Frame(parent_frame, bg="#151515")
         games_frame.pack()
         
-        games_buttons_frame = tk.Frame(games_frame, bg="#F8F8F8")
+        games_buttons_frame = tk.Frame(games_frame, bg="#151515")
         games_buttons_frame.pack()
         
         # Creating play PTD buttons
@@ -214,10 +215,10 @@ class PTDLauncher:
     
     def _create_special_buttons(self, parent_frame):
         """Create the special/hacked version buttons"""
-        special_frame = tk.Frame(parent_frame, bg="#F8F8F8")
+        special_frame = tk.Frame(parent_frame, bg="#151515")
         special_frame.pack(pady=20)
         
-        hacked_buttons_frame = tk.Frame(special_frame, bg="#F8F8F8")
+        hacked_buttons_frame = tk.Frame(special_frame, bg="#151515")
         hacked_buttons_frame.pack()
         
         # Create hacked PTD buttons
@@ -244,10 +245,30 @@ class PTDLauncher:
     
     def _create_status_bar(self):
         """Create the status bar"""
+
         self.status_var = tk.StringVar()
         self.status_var.set("Ready")
-        status_bar = tk.Label(self.root, textvariable=self.status_var, bd=1, relief=tk.SUNKEN, anchor=tk.W)
-        status_bar.pack(side=tk.BOTTOM, fill=tk.X)
+        status_bar = tk.Label(
+            self.root, 
+            textvariable=self.status_var, 
+            # styling
+            bg="#151515",
+            fg="#888888",
+            font=("Terminal", 8), 
+            
+            # border
+            bd=0,
+            relief=tk.FLAT,
+
+            highlightthickness=1,
+            highlightbackground="#D3E012",
+            
+            # position
+            anchor=tk.W,
+            padx=10,
+            pady=5
+        )
+        status_bar.pack(side=tk.BOTTOM, fill=tk.X, pady=(0, 8))
 
     def _create_button(self, parent, text, img_def, img_hov, img_pre, command, text_color="white"):
         """Helper method to create a button with the common style"""
@@ -262,7 +283,7 @@ class PTDLauncher:
             img_pressed=img_pre,
             command=command,
             text_offset=12,
-            bg_color="#F8F8F8"
+            bg_color="#151515"
         )
     
     def open_pokecenter(self, game):
@@ -317,7 +338,7 @@ class PTDLauncher:
             copy_btn.config(text="Copied!")
             dialog.after(500, lambda: copy_btn.config(text="Copy URL"))
         
-        copy_btn = tk.Button(frame, text="Copy URL", command=copy_url, bg="#4A6EA9", fg="white", font=("Arial", 11))
+        copy_btn = tk.Button(frame, text="Copy URL", command=copy_url, bg="#3B4CCA", fg="white", font=("Arial", 11))
         copy_btn.pack(pady=10)
         
         # Focus the entry for easy copying
@@ -338,6 +359,8 @@ class PTDLauncher:
         settings_window.title("Settings")
         settings_window.geometry("400x300")
         settings_window.resizable(False, False)
+        settings_window.configure(bg="#151515")
+        
         
         # Center the window on the parent window
         self._center_window(settings_window)
@@ -348,14 +371,14 @@ class PTDLauncher:
     def _create_settings_ui(self, settings_window):
         """Create the settings UI components"""
         # Create main settings frame with a better color scheme
-        main_frame = tk.Frame(settings_window, bg="#F8F8F8", padx=15, pady=15)
+        main_frame = tk.Frame(settings_window, bg="#151515", padx=15, pady=15)
         main_frame.pack(fill=tk.BOTH, expand=True)
         
         # Add sound settings
         sound_var = self._create_sound_settings(main_frame)
         
-        # Add separator
-        ttk.Separator(main_frame, orient='horizontal').pack(fill=tk.X, pady=10)
+        # separator
+        tk.Frame(main_frame, height=1, bg="#333333").pack(fill=tk.X, pady=10)
         
         # Add Flash Player settings
         path_var = self._create_flash_player_settings(main_frame)
@@ -375,29 +398,29 @@ class PTDLauncher:
     
     def _create_sound_settings(self, parent_frame):
         """Create the sound settings section"""
-        sound_frame = tk.Frame(parent_frame, bg="#F8F8F8", pady=5)
+        sound_frame = tk.Frame(parent_frame, bg="#151515", pady=5)
         sound_frame.pack(fill=tk.X)
         
-        tk.Label(sound_frame, text="Sound Effects:", font=("Arial", 11), bg="#F8F8F8").pack(side=tk.LEFT)
+        tk.Label(sound_frame, text="Sound Effects:", font=("Arial", 11), fg="white", bg="#151515").pack(side=tk.LEFT)
         sound_var = tk.BooleanVar(value=self.sound_manager.enabled)
-        sound_check = tk.Checkbutton(sound_frame, variable=sound_var, bg="#F8F8F8")
+        sound_check = tk.Checkbutton(sound_frame, variable=sound_var, bg="#151515")
         sound_check.pack(side=tk.LEFT, padx=10)
         
         return sound_var
     
     def _create_flash_player_settings(self, parent_frame):
         """Create the Flash Player settings section"""
-        flash_frame = tk.Frame(parent_frame, bg="#F8F8F8", pady=5)
+        flash_frame = tk.Frame(parent_frame, bg="#151515", pady=5)
         flash_frame.pack(fill=tk.X)
-        
-        tk.Label(flash_frame, text="Flash Player Path:", font=("Arial", 11), bg="#F8F8F8").pack(side=tk.LEFT)
-        
+
+        tk.Label(flash_frame, text="Flash Player Path:", font=("Arial", 11), fg="white", bg="#151515").pack(side=tk.LEFT)
+
         # Get Flash Player path from ConfigManager
         default_path = self.config_manager.get_flash_player_path() or ""
         
         path_var = tk.StringVar(value=default_path)
-        
-        path_entry_frame = tk.Frame(parent_frame, bg="#F8F8F8", pady=5)
+
+        path_entry_frame = tk.Frame(parent_frame, bg="#151515", pady=5)
         path_entry_frame.pack(fill=tk.X)
         
         path_entry = tk.Entry(path_entry_frame, textvariable=path_var, width=40, font=("Arial", 10))
@@ -405,26 +428,26 @@ class PTDLauncher:
         
         browse_btn = tk.Button(path_entry_frame, text="Browse", 
                              command=lambda: self._browse_flash_player(path_var),
-                             bg="#4A6EA9", fg="white", font=("Arial", 10))
+                             bg="#3B4CCA", fg="white", font=("Arial", 10))
         browse_btn.pack(side=tk.LEFT, padx=5)
         
         return path_var
     
     def _create_flash_download_button(self, parent_frame):
         """Create the Flash Player download button"""
-        download_frame = tk.Frame(parent_frame, bg="#F8F8F8", pady=10)
+        download_frame = tk.Frame(parent_frame, bg="#151515", pady=10)
         download_frame.pack(fill=tk.X)
         
         download_btn = tk.Button(download_frame, text="Download Flash Player", 
                                command=lambda: self._download_flash_player(download_btn),
-                               bg="#4A6EA9", fg="white", font=("Arial", 11))
+                               bg="#3B4CCA", fg="white", font=("Arial", 11))
         download_btn.pack()
         
         return download_btn
     
     def _create_settings_action_buttons(self, settings_window, sound_var, path_var):
         """Create the Save and Cancel buttons for settings"""
-        btn_frame = tk.Frame(settings_window, bg="#F8F8F8")
+        btn_frame = tk.Frame(settings_window, bg="#151515")
         btn_frame.pack(fill=tk.X, padx=15, pady=15)
         
         cancel_btn = tk.Button(btn_frame, text="Cancel", 
@@ -434,7 +457,7 @@ class PTDLauncher:
         
         save_btn = tk.Button(btn_frame, text="Save", 
                            command=lambda: self._save_settings(sound_var, path_var, settings_window),
-                           bg="#4A6EA9", fg="white", font=("Arial", 11), width=10)
+                           bg="#3B4CCA", fg="white", font=("Arial", 11), width=10)
         save_btn.pack(side=tk.RIGHT, padx=5)
     
     def _center_window(self, window):
