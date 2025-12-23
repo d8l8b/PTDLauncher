@@ -5,6 +5,7 @@ import os
 import requests
 import tkinter as tk
 from base_manager import BaseManager
+from config import resource_path
 
 class UpdateManager(BaseManager):
     def __init__(self, config_manager, game_manager, download_manager=None, status_callback=None):
@@ -95,6 +96,8 @@ class UpdateManager(BaseManager):
         update_window.resizable(False, False)
         update_window.transient(root)
         update_window.grab_set()
+        update_window.iconbitmap(resource_path("resources/favicon-original.ico"))
+        
         
         self.center_window(update_window, root)
 

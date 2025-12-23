@@ -22,6 +22,8 @@ class PTDLauncher:
         self.root.geometry("750x500")
         self.root.resizable(False, False)
         self.root.configure(bg="#151515")
+        icon_path = resource_path("resources/favicon-original.ico")
+        self.root.iconbitmap(icon_path)
         
         # Initialize managers
         self.config_manager = ConfigManager()
@@ -360,7 +362,7 @@ class PTDLauncher:
         settings_window.geometry("400x300")
         settings_window.resizable(False, False)
         settings_window.configure(bg="#151515")
-        
+        settings_window.iconbitmap(resource_path("resources/favicon-original.ico"))
         
         # Center the window on the parent window
         self._center_window(settings_window)
