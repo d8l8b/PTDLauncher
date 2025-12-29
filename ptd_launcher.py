@@ -13,9 +13,9 @@ from download_manager import DownloadManager
 from flash_manager import FlashManager
 from game_manager import GameManager
 from updater import UpdateManager
-from custom_image_button import CustomImageButton
-from set_window_icon import set_window_icon
-from get_colormap import get_colormap
+from utils.custom_image_button import CustomImageButton
+from utils.set_window_icon import set_window_icon
+from utils.get_colormap import get_colormap
 
 class PTDLauncher:
     def __init__(self, root):

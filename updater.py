@@ -6,7 +6,7 @@ import requests
 import tkinter as tk
 from base_manager import BaseManager
 from config import resource_path
-from set_window_icon import set_window_icon
+from utils.set_window_icon import set_window_icon
 
 class UpdateManager(BaseManager):
     def __init__(self, config_manager, game_manager, download_manager=None, status_callback=None):
