@@ -97,7 +97,7 @@ class UpdateManager(BaseManager):
         update_window.resizable(False, False)
         update_window.transient(root)
         update_window.grab_set()
-        set_window_icon(update_window, resource_path("resources/favicon-original.ico"))
+        set_window_icon(update_window, resource_path("resources/favicon-original"))
 
         self.center_window(update_window, root)
 

@@ -3,7 +3,15 @@ import platform
 import tkinter as tk
 
 # function to set the window favicon and prevent malfunction on linux systems
-def set_window_icon(window, icon_path):
+def set_window_icon(window, base_filename):
+    # Determine the extension based on the OS
+    if platform.system() == "Windows":
+        icon_path = f"{base_filename}.ico"
+    else:
+        # Using .gif (or .png) for Linux/macOS
+        icon_path = f"{base_filename}.gif"
+    
+    # Check if the file exists after appending the extension
     if not os.path.exists(icon_path):
         print(f"Warning: Icon file not found at {icon_path}")
         return

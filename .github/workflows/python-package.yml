@@ -29,8 +29,18 @@ jobs:
         run: |
           pyinstaller --onefile --windowed --noupx --icon=resources/favicon-original.ico `
             --add-data "resources/favicon-original.ico;resources" `
+            --add-data "resources/favicon-original.gif;resources" `
             --add-data "resources/favicon-flash.ico;resources" `
             --add-data "resources/logo.png;resources" `
+            --add-data "resources/PTD_HACKED_DEFAULT.png;resources" `
+            --add-data "resources/PTD_HACKED_HOVER.png;resources" `
+            --add-data "resources/PTD_HACKED_PRESSED.png;resources" `
+            --add-data "resources/PTD_PC_DEFAULT.png;resources" `
+            --add-data "resources/PTD_PC_HOVER.png;resources" `
+            --add-data "resources/PTD_PC_PRESSED.png;resources" `
+            --add-data "resources/PTD_PLAY_DEFAULT.png;resources" `
+            --add-data "resources/PTD_PLAY_HOVER.png;resources" `
+            --add-data "resources/PTD_PLAY_PRESSED.png;resources" `
             --add-data "resources/settings.png;resources" `
             --add-data "resources/update.png;resources" `
             --add-data "resources/config.json;resources" `
@@ -44,10 +54,20 @@ jobs:
       - name: Build for Linux
         if: runner.os == 'Linux'
         run: |
-          pyinstaller --onefile --windowed --noupx --icon=resources/favicon-original.ico \
-            --add-data "resources/favicon-original.ico:resources" \
+          pyinstaller --onefile --windowed --noupx --icon=resources/favicon-original.gif \
+            --add-data "resources/favicon-original.ico;resources" `
+            --add-data "resources/favicon-original.gif:resources" \
             --add-data "resources/favicon-flash.ico:resources" \
             --add-data "resources/logo.png:resources" \
+            --add-data "resources/PTD_HACKED_DEFAULT.png;resources" \
+            --add-data "resources/PTD_HACKED_HOVER.png;resources" \
+            --add-data "resources/PTD_HACKED_PRESSED.png;resources" \
+            --add-data "resources/PTD_PC_DEFAULT.png;resources" \
+            --add-data "resources/PTD_PC_HOVER.png;resources" \
+            --add-data "resources/PTD_PC_PRESSED.png;resources" \
+            --add-data "resources/PTD_PLAY_DEFAULT.png;resources" \
+            --add-data "resources/PTD_PLAY_HOVER.png;resources" \
+            --add-data "resources/PTD_PLAY_PRESSED.png;resources" \
             --add-data "resources/settings.png:resources" \
             --add-data "resources/update.png:resources" \
             --add-data "resources/config.json:resources" \
@@ -61,10 +81,20 @@ jobs:
       - name: Build for macOS
         if: runner.os == 'macOS'
         run: |
-          pyinstaller --onefile --windowed --noupx --icon=resources/favicon-original.ico \
-            --add-data "resources/favicon-original.ico:resources" \
+          pyinstaller --onefile --windowed --noupx --icon=resources/favicon-original.gif \
+            --add-data "resources/favicon-original.ico;resources" `
+            --add-data "resources/favicon-original.gif:resources" \
             --add-data "resources/favicon-flash.ico:resources" \
             --add-data "resources/logo.png:resources" \
+            --add-data "resources/PTD_HACKED_DEFAULT.png;resources" \
+            --add-data "resources/PTD_HACKED_HOVER.png;resources" \
+            --add-data "resources/PTD_HACKED_PRESSED.png;resources" \
+            --add-data "resources/PTD_PC_DEFAULT.png;resources" \
+            --add-data "resources/PTD_PC_HOVER.png;resources" \
+            --add-data "resources/PTD_PC_PRESSED.png;resources" \
+            --add-data "resources/PTD_PLAY_DEFAULT.png;resources" \
+            --add-data "resources/PTD_PLAY_HOVER.png;resources" \
+            --add-data "resources/PTD_PLAY_PRESSED.png;resources" \
             --add-data "resources/settings.png:resources" \
             --add-data "resources/update.png:resources" \
             --add-data "resources/config.json:resources" \
