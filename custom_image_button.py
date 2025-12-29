@@ -4,7 +4,7 @@ class CustomImageButton(tk.Canvas):
     def __init__(self, parent, text, width, height, 
                  img_default, img_hover, img_pressed, 
                  command=None, text_offset=2,
-                 text_color="white", font=("Terminal", 15), bg_color="#151515"):
+                 text_color="white", font=("Arial", 13), bg_color="#151515"):
         
         super().__init__(parent, width=width, height=height, 
                          bg=bg_color, bd=0, highlightthickness=0, cursor="hand2")
