@@ -55,7 +55,7 @@ jobs:
         if: runner.os == 'Linux'
         run: |
           pyinstaller --onefile --windowed --noupx --icon=resources/favicon-original.ico \
-            --add-data "resources/favicon-original.ico;resources" `
+            --add-data "resources/favicon-original.ico;resources" \
             --add-data "resources/favicon-original.gif:resources" \
             --add-data "resources/favicon-flash.ico:resources" \
             --add-data "resources/logo.png:resources" \
@@ -82,7 +82,7 @@ jobs:
         if: runner.os == 'macOS'
         run: |
           pyinstaller --onefile --windowed --noupx --icon=resources/favicon-original.ico \
-            --add-data "resources/favicon-original.ico;resources" `
+            --add-data "resources/favicon-original.ico;resources" \
             --add-data "resources/favicon-original.gif:resources" \
             --add-data "resources/favicon-flash.ico:resources" \
             --add-data "resources/logo.png:resources" \
