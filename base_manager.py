@@ -2,7 +2,6 @@
 import platform
 import tkinter as tk
 from tkinter import Toplevel, Label, Button, Frame, messagebox
-from utils.set_window_icon import set_window_icon
 
 class BaseManager:
     def __init__(self, status_callback=None):
@@ -79,7 +78,6 @@ class BaseManager:
         dialog.resizable(False, False)
         dialog.transient(parent)  # Set to be on top of the parent window
         dialog.grab_set()  # Make the dialog modal
-        set_window_icon(update_window, resource_path("resources/favicon-original"))
         
         # Center the dialog on the parent window
         self.center_window(dialog, parent)

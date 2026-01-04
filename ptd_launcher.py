@@ -14,7 +14,6 @@ from flash_manager import FlashManager
 from game_manager import GameManager
 from updater import UpdateManager
 from utils.custom_image_button import CustomImageButton
-from utils.set_window_icon import set_window_icon
 from utils.get_colormap import get_colormap
 
 class PTDLauncher:
@@ -27,7 +26,6 @@ class PTDLauncher:
         self.colormap = get_colormap()
 
         self.root.configure(bg=self.colormap.background)
-        set_window_icon(self.root, resource_path("resources/favicon-original"))
         
         # Initialize managers
         self.config_manager = ConfigManager()
@@ -366,7 +364,6 @@ class PTDLauncher:
         settings_window.geometry("400x300")
         settings_window.resizable(False, False)
         settings_window.configure(bg=self.colormap.background)
-        set_window_icon(settings_window, resource_path("resources/favicon-original"))
         
         # Center the window on the parent window
         self._center_window(settings_window)
