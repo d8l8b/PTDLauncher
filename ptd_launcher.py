@@ -99,7 +99,7 @@ class PTDLauncher:
     def check_flash_and_games(self):
         """Check Flash Player on startup"""
         # Schedule the flash check after the main loop starts
-        self.root.after(100, self._delayed_flash_check)
+        self.root.after(60, self._delayed_flash_check)
         
         # Set status to ready
         self.update_status("Ready to play")
@@ -113,6 +113,15 @@ class PTDLauncher:
             result = self.flash_manager.show_dialog(self.root, "Flash Player", "Flash Player is not installed. Do you want to download it now?")
             if result:
                 self.flash_manager.download_flash_player(self.root)
+                # Don't check for updates if Flash is being downloaded
+                return
+        
+        # After flash check is done, check for updates
+        self.root.after(60, self._delayed_update_check)
+    
+    def _delayed_update_check(self):
+        """Delayed update check to avoid thread issues"""
+        self.update_manager.check_updates(self.root)
     
     def create_ui(self):
         """Create the user interface"""
