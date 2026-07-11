@@ -5,7 +5,7 @@
   "author": "d8l8b",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/d8l8b/PTD-Launcher.git"
+    "url": "git+https://github.com/d8l8b/PTDLauncher.git"
   },
   "type": "module",
   "scripts": {

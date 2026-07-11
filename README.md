@@ -44,8 +44,8 @@ sudo apt install libwebkit2gtk-4.0-37
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/d8l8b/PTD-Launcher.git
-   cd PTD-Launcher
+   git clone https://github.com/d8l8b/PTDLauncher.git
+   cd PTDLauncher
    ```
 
 2. Install dependencies:
@@ -76,5 +76,5 @@ This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) f
 
 ## Credits
 
-Forked from [PTD-Launcher](https://github.com/tivp/PTD-Launcher) and [PTD-Launcher](https://github.com/Xeleron/PTDLauncher).
+Forked from [PTD-Launcher](https://github.com/tivp/PTD-Launcher) and [PTDLauncher](https://github.com/Xeleron/PTDLauncher).
 Based on work by original PTD Launcher developers.
