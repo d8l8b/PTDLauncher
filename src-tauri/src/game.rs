@@ -7,8 +7,8 @@ use tauri::{Emitter, Window};
 
 use crate::flash::DownloadProgress;
 
-/// Final URL veya dosya adından `-v` sonrası versiyon çıkarır.
-/// Örnek: `"https://ptd.onl/game/PTD1-v3.6.6.swf"` → `"3.6.6"`
+/// Extracts the version string after `-v` from the final URL or filename.
+/// Example: `"https://ptd.onl/game/PTD1-v3.6.6.swf"` → `"3.6.6"`
 fn parse_version_from_url(url: &str) -> Option<String> {
     let filename = url.split('/').last()?;
     if filename.contains("-v") {
@@ -102,14 +102,14 @@ pub async fn download_game(
         },
     );
 
-    // Download the file; dönen Option<String>:
-    //   Some("1.23")        → Content-Disposition'dan versiyon
+    // Download the file; the returned Option<String> is:
+    //   Some("1.23")        → version from Content-Disposition
     //   Some("1741776693")  → Last-Modified timestamp
-    //   None                → GET response'unda hiç header yoktu
+    //   None                → no relevant header in the GET response
     let remote_version = download_file_with_progress(&window, url, &dest_path, &game_id).await?;
 
-    // None gelirse HEAD isteği ile Last-Modified'ı ayrıca dene,
-    // o da yoksa Utc::now() timestamp'ini son çare olarak kullan.
+    // If None, try fetching Last-Modified separately via a HEAD request;
+    // if that also fails, fall back to the current Utc::now() timestamp as a last resort.
     let version_to_store = match remote_version {
         Some(v) => v,
         None => {
@@ -287,7 +287,7 @@ async fn download_file_with_progress(
     }
 
     // Grab version from the final (redirect) URL before consuming the body.
-    // Örn. "https://ptd.onl/game/PTD1-v3.6.6.swf" → "3.6.6"
+    // e.g. "https://ptd.onl/game/PTD1-v3.6.6.swf" → "3.6.6"
     let url_version = parse_version_from_url(response.url().as_str());
 
     let last_modified_ts = response
@@ -329,8 +329,8 @@ async fn download_file_with_progress(
         );
     }
 
-    // Versiyon öncelik sırası:
-    //   1. Final URL → "-v" sonrası (örn. "PTD1-v3.6.6.swf" → "3.6.6")
+    // Version priority order:
+    //   1. Final URL → after "-v" (e.g. "PTD1-v3.6.6.swf" → "3.6.6")
     //   2. Last-Modified → timestamp string
     let version = url_version.or(last_modified_ts);
 

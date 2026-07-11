@@ -112,8 +112,8 @@ fn save_settings(
     config::save_settings(&new_settings)
 }
 
-/// Flash Player'ın kurulum tarihini döndürür (ISO 8601).
-/// Hiç kurulmamışsa boş string döner.
+/// Returns the Flash Player install date (ISO 8601).
+/// Returns an empty string if it has never been installed.
 #[tauri::command]
 fn get_flash_install_date() -> String {
     config::load_versions()
@@ -121,8 +121,8 @@ fn get_flash_install_date() -> String {
         .unwrap_or_default()
 }
 
-/// Ruffle'ın kurulum tarihini döndürür (ISO 8601).
-/// Hiç kurulmamışsa boş string döner.
+/// Returns the Ruffle install date (ISO 8601).
+/// Returns an empty string if it has never been installed.
 #[tauri::command]
 fn get_ruffle_install_date() -> String {
     config::load_versions()
@@ -130,14 +130,14 @@ fn get_ruffle_install_date() -> String {
         .unwrap_or_default()
 }
 
-/// Final URL'den `-v` sonrası versiyon string'ini çıkarır.
-/// Örnek: `"https://ptd.onl/game/PTD1-v3.6.6.swf"` → `"3.6.6"`
+/// Extracts the version string after `-v` from the final URL.
+/// Example: `"https://ptd.onl/game/PTD1-v3.6.6.swf"` → `"3.6.6"`
 fn parse_version_from_url(url: &str) -> Option<String> {
     let filename = url.split('/').last()?;
     if filename.contains("-v") {
         let after_v = filename.split("-v").nth(1)?;
         let version = after_v.split('.').collect::<Vec<_>>();
-        // ".swf" uzantısını at: ["3","6","6","swf"] → "3.6.6"
+        // Drop the ".swf" extension: ["3","6","6","swf"] → "3.6.6"
         let version_parts: Vec<&str> = version
             .iter()
             .take_while(|p| p.chars().all(|c| c.is_ascii_digit()))
@@ -150,10 +150,10 @@ fn parse_version_from_url(url: &str) -> Option<String> {
     None
 }
 
-/// HEAD isteği atıp redirect sonrası final URL'den versiyon çeker.
+/// Fetches the remote version by sending a HEAD request and inspecting the final (redirect) URL.
 ///
-/// Öncelik sırası:
-///   1. Final URL → dosya adı → `-v<versiyon>`
+/// Priority order:
+///   1. Final URL → filename → `-v<version>`
 ///   2. Last-Modified → Unix timestamp string (fallback)
 ///   3. None
 async fn fetch_remote_version(
@@ -165,7 +165,7 @@ async fn fetch_remote_version(
         return None;
     }
 
-    // 1. Redirect sonrası final URL (örn. "https://ptd.onl/game/PTD1-v3.6.6.swf")
+    // 1. Final URL after redirect (e.g. "https://ptd.onl/game/PTD1-v3.6.6.swf")
     if let Some(version) = parse_version_from_url(resp.url().as_str()) {
         return Some(version);
     }
@@ -217,17 +217,17 @@ async fn check_for_updates(
             }
         };
 
-        // HEAD isteği → final URL'den versiyon
+        // HEAD request → version from final URL
         match fetch_remote_version(&client, &url).await {
             Some(remote_version) if remote_version != local_version => {
-                // Sayısal timestamp ise büyük/küçük karşılaştır,
-                // semver string ise eşitsizlik güncelleme var demek.
+                // If both versions are numeric timestamps, compare them numerically;
+                // if they are semver strings, any difference means an update is available.
                 let needs_update = match (
                     local_version.parse::<i64>(),
                     remote_version.parse::<i64>(),
                 ) {
                     (Ok(local_ts), Ok(remote_ts)) => remote_ts > local_ts,
-                    _ => true, // semver farklıysa güncelleme var
+                    _ => true, // semver strings differ → update available
                 };
                 if needs_update {
                     updates.push(game_id.clone());

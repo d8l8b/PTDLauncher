@@ -156,7 +156,7 @@ export function SettingsModal({ isOpen, onClose, onStatusChange, onSoundToggle }
     }
   }
 
-  /** ISO 8601 string'i kullanıcı dostu tarihe çevirir. */
+  /** Converts an ISO 8601 string to a user-friendly date. */
   function formatInstallDate(iso: string): string {
     if (!iso) return '';
     try {
