@@ -1,0 +1,45 @@
+[package]
+name = "ptdlauncher"
+version = "0.0.0"
+description = "A Tauri App for Pokemon Tower Defense"
+authors = ["d8l8b"]
+license = "MIT"
+repository = "https://github.com/d8l8b/PTDLauncher"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[lib]
+# The `_lib` suffix may seem redundant but it is necessary
+# to make the lib name unique and wouldn't conflict with the bin name.
+# This seems to be only an issue on Windows, see https://github.com/rust-lang/cargo/issues/8519
+name = "ptdlauncher_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri = { version = "2", features = [] }
+tauri-plugin-dialog = "2"
+tauri-plugin-opener = "2"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+reqwest = { version = "0.13.2", features = ["stream", "json"] }
+tokio = { version = "1", features = ["full"] }
+futures-util = "0.3"
+dirs = "6.0.0"
+flate2 = "1"
+tar = "0.4"
+chrono = "0.4"
+walkdir = "2.5.0"
+zip = "7.4.0"
+fs_extra = "1.3"
+
+[profile.release]
+codegen-units = 1
+lto = true
+opt-level = "s"
+panic = "abort"
+strip = true
+

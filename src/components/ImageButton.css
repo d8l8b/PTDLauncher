@@ -1,0 +1,55 @@
+.image-button {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 160px;
+  height: 70px;
+  user-select: none;
+}
+
+.image-button:active:not(:disabled) {
+  transform: translateY(2px);
+}
+
+.image-button--disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+/* The sprite image fills the entire button */
+.image-button img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  draggable: false;
+}
+
+/* Text label sits on top of the image */
+.image-button-label {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-family: Arial, sans-serif;
+  font-weight: normal;
+  font-size: 0.8rem;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.85);
+  pointer-events: none;
+  line-height: 1.2;
+  text-align: center;
+  gap: 1px;
+}
+
+.image-button-line {
+  display: block;
+}

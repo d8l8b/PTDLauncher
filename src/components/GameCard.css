@@ -1,0 +1,126 @@
+.game-card {
+  background: rgba(21, 21, 21, 0.8);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.game-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--color-accent-blue);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+}
+
+.game-card-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  gap: 1rem;
+  z-index: 1;
+}
+
+.game-title {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin: 0;
+  color: var(--color-text-primary);
+  text-transform: uppercase;
+}
+
+.game-description {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+  flex-grow: 1;
+}
+
+.progress-bar-container {
+  height: 6px;
+  background: #333;
+  border-radius: 3px;
+  overflow: hidden;
+  margin-top: auto;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.progress-bar {
+  height: 100%;
+  background: var(--gradient-primary);
+  border-radius: 3px;
+  transition: width 0.3s ease;
+}
+
+.game-actions {
+  display: flex;
+  margin-top: 1rem;
+}
+
+/* Legacy Button Style Mimic */
+.game-button {
+  flex: 1;
+  padding: 0.8rem 0;
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  border-radius: 2px; /* Slight rounding like legacy */
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.1s ease;
+  position: relative;
+  text-align: center;
+  color: white;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.8);
+
+  /* Gradient Background to mimic button image */
+  background: linear-gradient(to bottom, #4a90e2 0%, #305f9e 50%, #20406b 100%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.game-button:hover:not(:disabled) {
+  /* Lighter gradient for hover */
+  background: linear-gradient(to bottom, #5aa0f2 0%, #406fbe 50%, #30507b 100%);
+  transform: translateY(-1px);
+}
+
+.game-button:active:not(:disabled) {
+  /* Darker/Inverted for press */
+  background: linear-gradient(to bottom, #20406b 0%, #305f9e 50%, #4a90e2 100%);
+  transform: translateY(1px);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.4);
+  border-color: rgba(255, 255, 255, 0.6);
+}
+
+/* Secondary / Download Button Style (Greenish/Different) */
+.game-button.secondary {
+  /* Green gradient for download/not ready? Or just different blue? 
+     Legacy "Play" was often Blue/Green. Let's make "Download" Green. */
+  background: linear-gradient(to bottom, #4ae290 0%, #309e6f 50%, #206b40 100%);
+  border-color: rgba(255, 255, 255, 0.8);
+}
+
+.game-button.secondary:hover:not(:disabled) {
+  background: linear-gradient(to bottom, #5af2a0 0%, #40be7f 50%, #307b50 100%);
+}
+
+.game-button.secondary:active:not(:disabled) {
+  background: linear-gradient(to bottom, #206b40 0%, #309e6f 50%, #4ae290 100%);
+}
+
+.game-button:disabled {
+  background: #444;
+  color: #888;
+  border-color: #666;
+  cursor: not-allowed;
+  box-shadow: none;
+}

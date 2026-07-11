@@ -1,0 +1,277 @@
+:root {
+  --color-bg:            #151515;
+  --color-header-bg:     #3b4cca;
+  --color-footer-bg:     #151515;
+  --color-status-text:   #888888;
+  --color-status-border: #D3E012;
+  --font-display: Arial, sans-serif;
+  --font-body:    Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body, #root {
+  height: 100%;
+  width: 100%;
+  background: var(--color-bg);
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--color-bg);
+  color: #fff;
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── App Shell ──────────────────────────────────────────────── */
+.app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100%;
+  background: var(--color-bg);
+}
+
+/* ─── Header ─────────────────────────────────────────────────── */
+.app-header {
+  background: var(--color-header-bg);
+  height: 81px;
+  padding: 0 10px 0 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.3);
+  flex-shrink: 0;
+}
+
+.header-logo {
+  height: 65px;
+  width: auto;
+  object-fit: contain;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.icon-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.35rem;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s;
+}
+
+.icon-button:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.icon-button:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.icon-button img {
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
+}
+
+/* ─── Main Content ───────────────────────────────────────────── */
+.app-main {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.8rem 1.2rem;
+}
+
+/* ─── 3×3 Button Grid ────────────────────────────────────────── */
+.launcher-grid {
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  grid-template-rows: repeat(3, auto);
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+/* ─── Footer / Status Bar ────────────────────────────────────── */
+.app-footer {
+  flex-shrink: 0;
+  background: var(--color-footer-bg);
+  border-top: 1px solid var(--color-status-border);
+  padding: 0.3rem 0.8rem;
+}
+
+.status-bar {
+  display: flex;
+  align-items: center;
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  color: var(--color-status-text);
+}
+
+/* ─── Update button spin ─────────────────────────────────────── */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.icon-button.spinning img {
+  animation: spin 1s linear infinite;
+}
+
+/* ─── Update Modal ───────────────────────────────────────────── */
+.update-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.update-modal {
+  background: #1e1e1e;
+  border: 1px solid #444;
+  width: 360px;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  font-family: Arial, sans-serif;
+}
+
+.update-modal-header {
+  background: #3b4cca;
+  padding: 8px 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  font-weight: bold;
+  color: #fff;
+  border-radius: 6px 6px 0 0;
+}
+
+.update-close {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0 2px;
+  opacity: 0.8;
+}
+.update-close:hover { opacity: 1; }
+
+.update-modal-body {
+  padding: 10px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Update All button */
+.update-all-btn {
+  width: 100%;
+  padding: 6px 0;
+  background: #3b4cca;
+  border: none;
+  border-radius: 4px;
+  color: #fff;
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.update-all-btn:hover:not(:disabled) { background: #4a5ed9; }
+.update-all-btn:disabled { background: #333; color: #666; cursor: not-allowed; }
+
+/* Game rows */
+.update-game-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.update-game-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #111;
+  border: 1px solid #333;
+  border-radius: 3px;
+  padding: 5px 8px;
+}
+
+.update-game-name {
+  flex: 1;
+  font-size: 12px;
+  color: #ddd;
+  white-space: nowrap;
+}
+
+.update-progress-bar {
+  flex: 1;
+  height: 4px;
+  background: #333;
+  border-radius: 2px;
+  overflow: hidden;
+}
+.update-progress-bar > div {
+  height: 100%;
+  background: #3b4cca;
+  border-radius: 2px;
+  transition: width 0.2s ease;
+}
+
+.update-single-btn {
+  padding: 3px 12px;
+  background: #2a3a9a;
+  border: 1px solid #3b4cca;
+  border-radius: 3px;
+  color: #fff;
+  font-family: Arial, sans-serif;
+  font-size: 11px;
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+  min-width: 52px;
+  text-align: center;
+  transition: background 0.15s;
+}
+.update-single-btn:hover:not(:disabled) { background: #3b4cca; }
+.update-single-btn:disabled { background: #1a1a1a; color: #555; border-color: #333; cursor: not-allowed; }
+
+.update-modal-footer {
+  padding: 8px 14px 10px;
+  display: flex;
+  justify-content: flex-end;
+  border-top: 1px solid #2a2a2a;
+}
+
+.update-ok {
+  background: #333;
+  border: 1px solid #555;
+  color: #ccc;
+  padding: 4px 18px;
+  font-size: 11px;
+  font-family: Arial, sans-serif;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+.update-ok:hover { background: #444; color: #fff; }

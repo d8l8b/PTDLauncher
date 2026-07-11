@@ -1,0 +1,27 @@
+{
+    "flash_player": {
+        "fallback_version": "32.0.0.465",
+        "windows": {
+            "primary_url": "https://www.flash.cn/cdm/latest/flashplayer_sa.exe",
+            "fallback_url": "https://fpdownload.macromedia.com/pub/flashplayer/updaters/32/flashplayer_32_sa.exe",
+            "filename": "flashplayer_sa.exe"
+        },
+        "macos": {
+            "primary_url": "https://fpdownload.macromedia.com/pub/flashplayer/updaters/32/flashplayer_32_sa.dmg",
+            "filename": "Flash Player.app"
+        },
+        "linux": {
+            "primary_url": "https://fpdownload.macromedia.com/pub/flashplayer/updaters/32/flash_player_sa_linux.x86_64.tar.gz",
+            "fallback_url": "https://archive.org/download/flashplayer_standalone_projectors/flash_player_sa_linux.x86_64.tar.gz",
+            "filename": "flashplayer"
+        }
+    },
+    "game_urls": {
+        "PTD1": "https://ptd.onl/ptd1-latest.swf",
+        "PTD1_Hacked": "https://ptd.onl/ptd1-hacked-latest.swf",
+        "PTD2": "https://ptd.onl/ptd2-latest.swf",
+        "PTD2_Hacked": "https://ptd.onl/ptd2-hacked-latest.swf",
+        "PTD3": "https://ptd.onl/ptd3-latest.swf",
+        "PTD3_Hacked": "https://ptd.onl/ptd3-hacked-latest.swf"
+    }
+}

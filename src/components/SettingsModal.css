@@ -1,0 +1,310 @@
+/* SettingsModal — compact, self-contained, Arial-based */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: #1e1e1e;
+  border: 1px solid #444;
+  width: 380px;
+  max-height: 340px;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  font-family: Arial, sans-serif;
+  overflow: hidden;
+}
+
+/* ─── Header ── */
+.modal-header {
+  background: #3b4cca;
+  padding: 7px 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.modal-header h2 {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  font-size: 13px;
+  font-weight: bold;
+  color: #fff;
+}
+
+.close-button {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0 2px;
+  opacity: 0.8;
+}
+.close-button:hover { opacity: 1; }
+
+/* ─── Body ── */
+.modal-body {
+  padding: 10px 14px;
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.modal-body::-webkit-scrollbar { width: 4px; }
+.modal-body::-webkit-scrollbar-track { background: transparent; }
+.modal-body::-webkit-scrollbar-thumb { background: #444; border-radius: 2px; }
+
+/* ─── Sections ── */
+.settings-section {
+  background: #111;
+  border: 1px solid #333;
+  border-radius: 4px;
+  padding: 8px 10px;
+}
+
+.settings-section h3 {
+  margin: 0 0 6px 0;
+  font-family: Arial, sans-serif;
+  font-size: 11px;
+  font-weight: bold;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* ─── Player toggle ── */
+.player-toggle {
+  display: flex;
+  background: #1a1a1a;
+  border: 1px solid #333;
+  border-radius: 3px;
+  overflow: hidden;
+  gap: 1px;
+}
+
+.player-toggle label {
+  flex: 1;
+  text-align: center;
+  padding: 5px 0;
+  cursor: pointer;
+  font-family: Arial, sans-serif;
+  font-size: 11px;
+  color: #999;
+  user-select: none;
+  transition: background 0.15s, color 0.15s;
+}
+.player-toggle label:hover { color: #fff; background: rgba(255,255,255,0.05); }
+.player-toggle label.selected { background: #3b4cca; color: #fff; }
+.player-toggle input[type='radio'] { display: none; }
+
+/* ─── Flash / Ruffle status row ── */
+.flash-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.status-indicator {
+  font-family: Arial, sans-serif;
+  font-size: 11px;
+  padding: 3px 8px;
+  border-radius: 3px;
+  font-weight: bold;
+}
+.status-indicator.installed   { background: rgba(34,197,94,0.15); color: #4ade80; border: 1px solid rgba(34,197,94,0.3); }
+.status-indicator.not-installed { background: rgba(239,68,68,0.12); color: #f87171; border: 1px solid rgba(239,68,68,0.3); }
+
+.download-flash-button {
+  padding: 4px 10px;
+  border: none;
+  border-radius: 3px;
+  background: #3b4cca;
+  color: #fff;
+  font-family: Arial, sans-serif;
+  font-size: 11px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.download-flash-button:hover:not(:disabled) { background: #4a5ed9; }
+.download-flash-button:disabled { background: #333; color: #555; cursor: not-allowed; }
+
+/* ─── Update button ── */
+.update-button {
+  padding: 4px 10px;
+  border: 1px solid #3b4cca;
+  border-radius: 3px;
+  background: transparent;
+  color: #7b8fe8;
+  font-family: Arial, sans-serif;
+  font-size: 11px;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+.update-button:hover:not(:disabled) {
+  background: #3b4cca;
+  color: #fff;
+}
+.update-button:disabled { border-color: #333; color: #555; cursor: not-allowed; }
+
+/* ─── Install date ── */
+.install-date {
+  margin-top: 5px;
+  font-family: Arial, sans-serif;
+  font-size: 10px;
+  color: #555;
+}
+
+/* ─── Progress bar ── */
+.progress-bar-container {
+  height: 4px;
+  background: #222;
+  border-radius: 2px;
+  overflow: hidden;
+  margin-top: 6px;
+}
+.progress-bar {
+  height: 100%;
+  background: #3b4cca;
+  border-radius: 2px;
+  transition: width 0.2s ease;
+}
+
+/* ─── Text input ── */
+.settings-input {
+  width: 100%;
+  padding: 5px 8px;
+  border: 1px solid #444;
+  border-radius: 3px;
+  background: #0a0a0a;
+  color: #fff;
+  font-family: Arial, sans-serif;
+  font-size: 11px;
+  box-sizing: border-box;
+  outline: none;
+  transition: border-color 0.15s;
+}
+.settings-input:focus { border-color: #3b4cca; }
+.settings-input::placeholder { color: #555; }
+
+/* ─── Path row (input + browse button) ── */
+.path-row {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+.path-row .settings-input {
+  flex: 1;
+  min-width: 0;
+}
+.browse-button {
+  padding: 5px 9px;
+  border: 1px solid #555;
+  border-radius: 3px;
+  background: #222;
+  color: #ccc;
+  font-family: Arial, sans-serif;
+  font-size: 11px;
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: background 0.15s, color 0.15s;
+}
+.browse-button:hover { background: #333; color: #fff; }
+
+.path-hint {
+  margin-top: 4px;
+  font-size: 10px;
+  color: #555;
+  word-break: break-all;
+  line-height: 1.4;
+}
+
+/* ─── Checkbox ── */
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  color: #ccc;
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  user-select: none;
+}
+.checkbox-label:hover { color: #fff; }
+
+.checkbox-label input[type='checkbox'] {
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  border: 1px solid #555;
+  border-radius: 2px;
+  background: #111;
+  cursor: pointer;
+  position: relative;
+  flex-shrink: 0;
+  transition: background 0.15s, border-color 0.15s;
+}
+.checkbox-label input[type='checkbox']:checked {
+  background: #3b4cca;
+  border-color: #3b4cca;
+}
+.checkbox-label input[type='checkbox']:checked::after {
+  content: '✓';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  font-size: 10px;
+  font-weight: bold;
+}
+
+/* ─── Footer ── */
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 6px;
+  padding: 7px 12px;
+  border-top: 1px solid #333;
+  background: #161616;
+  flex-shrink: 0;
+}
+
+.cancel-button {
+  background: transparent;
+  border: 1px solid #555;
+  color: #aaa;
+  padding: 4px 14px;
+  border-radius: 3px;
+  font-family: Arial, sans-serif;
+  font-size: 11px;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s;
+}
+.cancel-button:hover { border-color: #aaa; color: #fff; }
+
+.save-button {
+  background: #3b4cca;
+  border: none;
+  color: #fff;
+  padding: 4px 16px;
+  border-radius: 3px;
+  font-family: Arial, sans-serif;
+  font-size: 11px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.save-button:hover { background: #4a5ed9; }
